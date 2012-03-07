@@ -15,3 +15,20 @@ This project depends on (and extends) the following projects
 -  http://args4j.kohsuke.org/
 -  http://hc.apache.org/index.html
 -  http://code.google.com/p/json-simple
+
+Repository Structure
+====================
+
+args4j-2.0.16.jar is the args4j binary, unmodified.
+
+couchdb4j/* is a modified copy of couchdb4j.
+
+hrtail.properties is a typical configuration file.
+
+httpcomponents-client-4.1.3/* is a copy of the Apache HC project (just in case).
+
+log4j.properties is a typical configuration file.
+
+LogCapture/* is the actual log capture source.
+
+test/* are some test files.
