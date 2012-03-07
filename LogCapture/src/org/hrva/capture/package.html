@@ -27,7 +27,7 @@
             capturing transit system log files.
         </p>
         <ul>
-            <li><p><b>Log Tailing</b>.  The {@link org.hrva.hrtail.LogTail} class can be used to rapidly
+            <li><p><b>Log Tailing</b>.  The {@link org.hrva.capture.LogTail} class can be used to rapidly
                     tail a log file.  It saves the previous size in a history
                     cache.  During each cycle, it compares the current
                     size of the log with the previous size and extracts
@@ -35,14 +35,14 @@
                 </p>
             </li>
             <li><p><b>Reformatting</b>.  The log is in a human-friendly format and
-                    must be converted to be useful.  The {@link org.hrva.hrtail.Reformat} class can be used to
+                    must be converted to be useful.  The {@link org.hrva.capture.Reformat} class can be used to
                     reformat the log into CSV.</p>
             </li>
             <li><p><b>Couch Push</b>.  The extracts, after being reformatted
                     must be pushed to the HRT couch database 
                     (<a href="http://hrt.iriscouch.com:5984/feed/">http://hrt.iriscouch.com:5984/feed/</a>)
                     for further processing.
-                    The {@link org.hrva.hrtail.CouchPush} class can upload the real-time feed
+                    The {@link org.hrva.capture.CouchPush} class can upload the real-time feed
                     as well as the mappings required to interpret some of the keys.
                 </p>
             </li>
@@ -51,7 +51,7 @@
         <p>Each of these features is both a class that can be used in an
             application, as well as a stand-alone command-line program.
         </p>
-        <p>Additionally, the {@link Capture} Application serves an overall
+        <p>Additionally, the {@link org.hrva.capture.Capture} Application serves an overall
             wrapper to provide the essential tail-format-capture sequence
             running on a 1-minute interval.
         </p>
@@ -110,7 +110,7 @@ java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.CouchPush -m vehicle -e
         <h3>Capture<a name="capture"></a></h3>
         <dl>
             <dt><b>Name</b></dt>
-            <dd>{@link org.hrva.hrtail.Capture}</dd>
+            <dd>{@link org.hrva.capture.Capture}</dd>
             <dt><b>Synopsis</b></dt>
             <dd>
                 <code>java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.Capture /path/to/some.log</code>
@@ -148,7 +148,7 @@ java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.CouchPush -m vehicle -e
         <dl>
         <dt><b>Name</b></dt>
         <dd>
-            <p>{@link org.hrva.hrtail.CouchPush}</p>
+            <p>{@link org.hrva.capture.CouchPush}</p>
         </dd>
         <dt><b>Synopsis</b></dt>
         <dd>
@@ -160,7 +160,7 @@ java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.CouchPush -m vehicle -e
                 two common use cases.</p>
             <ul>
                 <li><b>Feed</b>.  Each time the log is tailed, a feed file
-                    is created and needs to be uploaded.  The {@link org.hrva.hrtail.Capture}
+                    is created and needs to be uploaded.  The {@link org.hrva.capture.Capture}
                     program handles the tail-to-feed process.  The <b><tt>-f</tt></b>
                     option is used for this.
                 </li>
@@ -208,7 +208,7 @@ java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.CouchPush -m vehicle -e
         <dl>
         <dt><b>Name</b></dt>
         <dd>
-            <p>{@link org.hrva.hrtail.LogTail}</p>
+            <p>{@link org.hrva.capture.LogTail}</p>
         </dd>
         <dt><b>Synopsis</b></dt>
         <dd>
@@ -263,7 +263,7 @@ java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.CouchPush -m vehicle -e
         <dl>
         <dt><b>Name</b></dt>
         <dd>
-            <p>{@link org.hrva.hrtail.Reformat}</p>
+            <p>{@link org.hrva.capture.Reformat}</p>
         </dd>
         <dt><b>Synopsis</b></dt>
         <dd>
