@@ -7,8 +7,7 @@ This is a Java project which includes components for two essential use cases.
 
 2.  The org.hrva.capture.CouchPush application to push mappings.
 
-These can be configured to populate http://hrt.iriscouch.com/feed and http://hrt.iriscouch.com/mapping
-databases.
+These can be configured to populate http://hrt.iriscouch.com/feed database.
 
 This project depends on (and extends) the following projects
 -  https://github.com/mbreese/couchdb4j/
