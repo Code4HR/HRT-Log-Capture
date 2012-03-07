@@ -31,3 +31,18 @@ log4j.properties is a typical configuration file.
 LogCapture/* is the actual log capture source.
 
 test/* are some test files.
+
+Testing
+========
+
+The tests of "Capture" expect a running coucdb database on your machine.
+
+Download and install couchdb to run the tests.
+
+Start couchdb.
+
+Create a "couchdbkit_test" database using CURL as follows::
+
+    curl -X put http://localhost:5984/couchdbkit_test
+
+This will be used for unit testing. 
