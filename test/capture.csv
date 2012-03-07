@@ -1,0 +1,3 @@
+Date,Time,Vehicle,Lat,Lon,Location Valid/Invalid,Adherence,Adherence Valid/Invalid,Route,Direction,Stop
+2012-02-15,07:04:42,V.1.2233,37.0620935,-76.3413842,V,-1,V,,,
+2012-02-15,07:04:42,V.1.2236,37.0315618,-76.3461352,V,2,V,4,2,45
