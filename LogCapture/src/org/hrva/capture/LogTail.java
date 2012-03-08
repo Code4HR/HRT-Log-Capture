@@ -205,6 +205,7 @@ public class LogTail {
                 if (rdr.length() < prev_size) {
                     // Got truncated.  Read from beginning.
                     sequence = 0;
+                    prev_size= 0;
                 } else {
                     // Got bigger.  Read from where we left off.
                     rdr.seek(prev_size);
