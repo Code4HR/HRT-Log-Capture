@@ -1,4 +1,6 @@
 #LogTail Cache
-#Tue Mar 06 10:17:17 EST 2012
+#Wed Mar 07 14:07:00 EST 2012
+seq.../HRT-Mock/simulated.log=68
+size.../HRT-Mock/simulated.log=224780
 seq.sample.csv=6
 size.sample.csv=14490

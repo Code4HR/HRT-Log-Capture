@@ -329,7 +329,7 @@ public class CouchPush {
             StringBuilder content = new StringBuilder();
             String line = rdr.readLine();
             while (line != null) {
-                content.append(line);
+                content.append(line);  content.append('\n');
                 line = rdr.readLine();
             }
             Document resp= db.putAttachment(id, rev1, name, "text/csv", content.toString());
