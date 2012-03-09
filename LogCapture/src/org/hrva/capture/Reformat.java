@@ -100,8 +100,8 @@ public class Reformat {
     /** Default year used to fill in incomplete dates. */
     Calendar now;
     
-    /** Is a CSV header row required?  Only of the file is new. */
-    boolean include_header= false;
+    /** Is a CSV header row required?  Only if the file is new. */
+    boolean include_header= true;
 
     /** Logger. */
     final Log  logger = LogFactory.getLog(Reformat.class);

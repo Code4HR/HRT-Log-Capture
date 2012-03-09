@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="MacBookPro-SLott-9.local" name="org.hrva.capture.CaptureTest" tests="2" time="8.838" timestamp="2012-03-09T14:16:02">
+<testsuite errors="0" failures="0" hostname="MacBookPro-SLott-9.local" name="org.hrva.capture.CaptureTest" tests="2" time="8.857" timestamp="2012-03-09T14:46:40">
   <properties>
     <property name="netbeans.autoupdate.country" value="US" />
     <property name="javac.test.classpath" value="../couchdb4j/target/couchdb4j-0.3.0-i386-1.jar:../args4j-2.0.16.jar:../couchdb4j/lib/commons-beanutils.jar:../couchdb4j/lib/commons-codec-1.3.jar:../couchdb4j/lib/commons-collections.jar:../couchdb4j/lib/commons-lang.jar:../couchdb4j/lib/commons-logging-1.1.jar:../couchdb4j/lib/ezmorph-1.0.3.jar:../couchdb4j/lib/httpclient-4.0-beta2.jar:../couchdb4j/lib/httpcore-4.0-beta2.jar:../couchdb4j/lib/json-lib-2.2.3-MODIFIED-jdk15.jar:build/classes:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/junit-3.8.2.jar" />
@@ -43,7 +43,7 @@
     <property name="copylibs.rebase" value="true" />
     <property name="manifest.available+main.class" value="true" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner org.hrva.capture.CaptureTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build/test/results/TEST-org.hrva.capture.CaptureTest.xml crashfile=/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build/junitvmwatcher1635496964722696107.properties propsfile=/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build/junit3758366496127212530.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner org.hrva.capture.CaptureTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build/test/results/TEST-org.hrva.capture.CaptureTest.xml crashfile=/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build/junitvmwatcher8200337898596003367.properties propsfile=/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build/junit8074075258086191706.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="jnlp.descriptor" value="application" />
@@ -314,32 +314,32 @@
     <property name="file.reference.args4j-2.0.16.jar" value="../args4j-2.0.16.jar" />
     <property name="awt.toolkit" value="apple.awt.CToolkit" />
   </properties>
-  <testcase classname="org.hrva.capture.CaptureTest" name="testRun_main" time="3.226" />
-  <testcase classname="org.hrva.capture.CaptureTest" name="testCapture" time="5.505" />
+  <testcase classname="org.hrva.capture.CaptureTest" name="testRun_main" time="3.129" />
+  <testcase classname="org.hrva.capture.CaptureTest" name="testCapture" time="5.621" />
   <system-out><![CDATA[run_main
 capture
 ]]></system-out>
-  <system-err><![CDATA[Mar 9, 2012 9:16:04 AM org.hrva.capture.LogTail tail
+  <system-err><![CDATA[Mar 9, 2012 9:46:42 AM org.hrva.capture.LogTail tail
 INFO: Tailing test/sample.log to test/capture.txt
-Mar 9, 2012 9:16:04 AM org.hrva.capture.LogTail tail
+Mar 9, 2012 9:46:42 AM org.hrva.capture.LogTail tail
 INFO: Count 0, Bytes 0
-Mar 9, 2012 9:16:04 AM org.hrva.capture.LogTail tail
+Mar 9, 2012 9:46:42 AM org.hrva.capture.LogTail tail
 INFO: Count 1, Bytes 327
-Mar 9, 2012 9:16:04 AM org.hrva.capture.Capture$Tail_Format_Push run
+Mar 9, 2012 9:46:42 AM org.hrva.capture.Capture$Tail_Format_Push run
 INFO: Reformatting test/capture.txt to test/capture.csv
-Mar 9, 2012 9:16:07 AM org.hrva.capture.LogTail tail
+Mar 9, 2012 9:46:45 AM org.hrva.capture.LogTail tail
 INFO: Tailing test/sample.log to test/capture.txt
-Mar 9, 2012 9:16:07 AM org.hrva.capture.LogTail tail
+Mar 9, 2012 9:46:45 AM org.hrva.capture.LogTail tail
 INFO: Count 0, Bytes 0
-Mar 9, 2012 9:16:07 AM org.hrva.capture.LogTail tail
+Mar 9, 2012 9:46:45 AM org.hrva.capture.LogTail tail
 INFO: Count 1, Bytes 327
-Mar 9, 2012 9:16:07 AM org.hrva.capture.Capture$Tail_Format_Push run
+Mar 9, 2012 9:46:45 AM org.hrva.capture.Capture$Tail_Format_Push run
 INFO: Reformatting test/capture.txt to test/capture.csv
-Mar 9, 2012 9:16:10 AM org.hrva.capture.LogTail tail
+Mar 9, 2012 9:46:48 AM org.hrva.capture.LogTail tail
 INFO: Tailing test/sample.log to test/capture.txt
-Mar 9, 2012 9:16:10 AM org.hrva.capture.LogTail tail
+Mar 9, 2012 9:46:48 AM org.hrva.capture.LogTail tail
 INFO: Count 1, Bytes 327
-Mar 9, 2012 9:16:10 AM org.hrva.capture.LogTail tail
+Mar 9, 2012 9:46:48 AM org.hrva.capture.LogTail tail
 INFO: Count 2, Bytes 327
 ]]></system-err>
 </testsuite>

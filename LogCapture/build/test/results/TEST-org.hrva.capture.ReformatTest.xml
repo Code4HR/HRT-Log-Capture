@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="MacBookPro-SLott-9.local" name="org.hrva.capture.ReformatTest" tests="13" time="0.49" timestamp="2012-03-09T14:16:14">
+<testsuite errors="0" failures="0" hostname="MacBookPro-SLott-9.local" name="org.hrva.capture.ReformatTest" tests="13" time="0.369" timestamp="2012-03-09T14:46:52">
   <properties>
     <property name="netbeans.autoupdate.country" value="US" />
     <property name="javac.test.classpath" value="../couchdb4j/target/couchdb4j-0.3.0-i386-1.jar:../args4j-2.0.16.jar:../couchdb4j/lib/commons-beanutils.jar:../couchdb4j/lib/commons-codec-1.3.jar:../couchdb4j/lib/commons-collections.jar:../couchdb4j/lib/commons-lang.jar:../couchdb4j/lib/commons-logging-1.1.jar:../couchdb4j/lib/ezmorph-1.0.3.jar:../couchdb4j/lib/httpclient-4.0-beta2.jar:../couchdb4j/lib/httpcore-4.0-beta2.jar:../couchdb4j/lib/json-lib-2.2.3-MODIFIED-jdk15.jar:build/classes:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/junit-3.8.2.jar" />
@@ -43,7 +43,7 @@
     <property name="copylibs.rebase" value="true" />
     <property name="manifest.available+main.class" value="true" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner org.hrva.capture.ReformatTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build/test/results/TEST-org.hrva.capture.ReformatTest.xml crashfile=/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build/junitvmwatcher7857721420451213314.properties propsfile=/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build/junit5739954927007744907.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner org.hrva.capture.ReformatTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build/test/results/TEST-org.hrva.capture.ReformatTest.xml crashfile=/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build/junitvmwatcher8650982820336269704.properties propsfile=/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build/junit7217798344054560119.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="jnlp.descriptor" value="application" />
@@ -314,19 +314,19 @@
     <property name="file.reference.args4j-2.0.16.jar" value="../args4j-2.0.16.jar" />
     <property name="awt.toolkit" value="apple.awt.CToolkit" />
   </properties>
-  <testcase classname="org.hrva.capture.ReformatTest" name="testRun_main" time="0.228" />
+  <testcase classname="org.hrva.capture.ReformatTest" name="testRun_main" time="0.178" />
   <testcase classname="org.hrva.capture.ReformatTest" name="testReformat_bad_1" time="0.0010" />
   <testcase classname="org.hrva.capture.ReformatTest" name="testReformat_good_1" time="0.0010" />
   <testcase classname="org.hrva.capture.ReformatTest" name="testLabel_value_good" time="0.0040" />
-  <testcase classname="org.hrva.capture.ReformatTest" name="testGet_lat" time="0.0" />
-  <testcase classname="org.hrva.capture.ReformatTest" name="testGet_lon" time="0.0" />
-  <testcase classname="org.hrva.capture.ReformatTest" name="testExtract_fields_bad_1" time="0.0050" />
-  <testcase classname="org.hrva.capture.ReformatTest" name="testExtract_fields_incomplete_location_1" time="0.0060" />
-  <testcase classname="org.hrva.capture.ReformatTest" name="testExtract_incomplete_location_2" time="0.0080" />
-  <testcase classname="org.hrva.capture.ReformatTest" name="testExtract_incomplete_location_3" time="0.0010" />
-  <testcase classname="org.hrva.capture.ReformatTest" name="testExtract_filter_dwell" time="0.0" />
-  <testcase classname="org.hrva.capture.ReformatTest" name="testExtract_location" time="0.0040" />
-  <testcase classname="org.hrva.capture.ReformatTest" name="testExtract_arrival" time="0.0030" />
+  <testcase classname="org.hrva.capture.ReformatTest" name="testGet_lat" time="0.0010" />
+  <testcase classname="org.hrva.capture.ReformatTest" name="testGet_lon" time="0.0010" />
+  <testcase classname="org.hrva.capture.ReformatTest" name="testExtract_fields_bad_1" time="0.02" />
+  <testcase classname="org.hrva.capture.ReformatTest" name="testExtract_fields_incomplete_location_1" time="0.0080" />
+  <testcase classname="org.hrva.capture.ReformatTest" name="testExtract_incomplete_location_2" time="0.015" />
+  <testcase classname="org.hrva.capture.ReformatTest" name="testExtract_incomplete_location_3" time="0.0060" />
+  <testcase classname="org.hrva.capture.ReformatTest" name="testExtract_filter_dwell" time="0.0010" />
+  <testcase classname="org.hrva.capture.ReformatTest" name="testExtract_location" time="0.0030" />
+  <testcase classname="org.hrva.capture.ReformatTest" name="testExtract_arrival" time="0.0020" />
   <system-out><![CDATA[run_main
 testReformat_bad_1
 testReformat_good_1
@@ -341,11 +341,11 @@ testExtract_filter_dwell
 testExtract_location
 testExtract_arrival
 ]]></system-out>
-  <system-err><![CDATA[Mar 9, 2012 9:16:14 AM org.hrva.capture.Reformat run_main
+  <system-err><![CDATA[Mar 9, 2012 9:46:52 AM org.hrva.capture.Reformat run_main
 INFO: Reformatting test/sample.input to test/sample.output
-Mar 9, 2012 9:16:14 AM org.hrva.capture.Reformat reformat
+Mar 9, 2012 9:46:52 AM org.hrva.capture.Reformat reformat
 WARNING: Invalid 'sample data'
-Mar 9, 2012 9:16:14 AM org.hrva.capture.ReformatTest testExtract_fields_incomplete_location_1
+Mar 9, 2012 9:46:52 AM org.hrva.capture.ReformatTest testExtract_fields_incomplete_location_1
 SEVERE: null
 org.hrva.capture.Reformat$InvalidRow
 	at org.hrva.capture.Reformat.extract_fields(Reformat.java:429)
@@ -365,7 +365,7 @@ org.hrva.capture.Reformat$InvalidRow
 	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:518)
 	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.launch(JUnitTestRunner.java:1052)
 	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.main(JUnitTestRunner.java:906)
-Mar 9, 2012 9:16:14 AM org.hrva.capture.ReformatTest testExtract_incomplete_location_2
+Mar 9, 2012 9:46:52 AM org.hrva.capture.ReformatTest testExtract_incomplete_location_2
 SEVERE: null
 org.hrva.capture.Reformat$InvalidRow
 	at org.hrva.capture.Reformat.label_value(Reformat.java:265)
@@ -386,7 +386,7 @@ org.hrva.capture.Reformat$InvalidRow
 	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:518)
 	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.launch(JUnitTestRunner.java:1052)
 	at org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.main(JUnitTestRunner.java:906)
-Mar 9, 2012 9:16:14 AM org.hrva.capture.ReformatTest testExtract_incomplete_location_3
+Mar 9, 2012 9:46:52 AM org.hrva.capture.ReformatTest testExtract_incomplete_location_3
 SEVERE: null
 org.hrva.capture.Reformat$InvalidRow
 	at org.hrva.capture.Reformat.get_time(Reformat.java:282)
