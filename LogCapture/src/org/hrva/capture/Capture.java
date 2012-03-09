@@ -235,7 +235,7 @@ public class Capture {
                 Reader extract = new FileReader(new File(created));
                 File csv_file = new File(csv_filename);
                 reformat.include_header = csv_file.length() == 0;
-                Writer wtr = new FileWriter(csv_file, true);
+                Writer wtr = new FileWriter(csv_file, false);
                 try {
                     Object[] details = {extract_filename, csv_filename};
                     logger.info(MessageFormat.format("Reformatting {0} to {1}", details));
@@ -251,7 +251,9 @@ public class Capture {
                 if (doc == null) {
                     logger.error("Couch Push Failed.");
                     cancel();
+                    return;
                 }
+                
             } catch (Exception ex) {
                 logger.fatal("Worker Failed", ex);
                 cancel();
