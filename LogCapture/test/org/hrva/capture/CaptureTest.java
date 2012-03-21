@@ -78,7 +78,7 @@ public class CaptureTest extends TestCase {
      */
     public void testRun_main() throws Exception {
         System.out.println("run_main");
-        String[] args = { "-1", "test/sample.log" };
+        String[] args = { "-1", "-t", "Tail_Format_Push", "test/sample.log" };
         Capture instance = new Capture(shared);
         instance.run_main(args);
         Thread.sleep(3000); // Wait
@@ -100,7 +100,7 @@ public class CaptureTest extends TestCase {
         double seconds = 0.0;
         
         Capture instance = new Capture(shared);
-        CaptureWorker worker= new Tail_Format_Push(instance);
+        CaptureWorker worker= new Tail_Format_Push();
         
         instance.capture(worker, seconds, source);
         Thread.sleep(3000); // Wait
@@ -115,7 +115,7 @@ public class CaptureTest extends TestCase {
         assertEquals( "1", status.getProperty("seq.test/sample.log") );
 
         instance = new Capture(shared);
-        worker= new Tail_Format_Push(instance);
+        worker= new Tail_Format_Push();
 
         instance.capture(worker, seconds, source);
         Thread.sleep(2500); // Wait

@@ -60,7 +60,8 @@ public class Tail_Format_PushTest extends TestCase {
     public void testSetCsv_filename() {
         System.out.println("setCsv_filename");
         String csv_filename = "test/capture.csv";
-        Tail_Format_Push instance = new Tail_Format_Push(capture);
+        Tail_Format_Push instance = new Tail_Format_Push();
+        instance.setCapture(capture);
         instance.setCsv_filename(csv_filename);
         assertEquals( csv_filename, instance.csv_filename );
     }
@@ -71,7 +72,8 @@ public class Tail_Format_PushTest extends TestCase {
     public void testSetExtract_filename() {
         System.out.println("setExtract_filename");
         String extract_filename = "test/capture.txt";
-        Tail_Format_Push instance = new Tail_Format_Push(capture);
+        Tail_Format_Push instance = new Tail_Format_Push();
+        instance.setCapture(capture);
         instance.setExtract_filename(extract_filename);
         assertEquals( extract_filename, instance.extract_filename );
     }
@@ -82,7 +84,8 @@ public class Tail_Format_PushTest extends TestCase {
     public void testSetSource_filename() {
         System.out.println("setSource_filename");
         String source_filename = "test/sample.log";
-        Tail_Format_Push instance = new Tail_Format_Push(capture);
+        Tail_Format_Push instance = new Tail_Format_Push();
+        instance.setCapture(capture);
         instance.setSource_filename(source_filename);
         assertEquals( source_filename, instance.source_filename );
     }
@@ -92,7 +95,8 @@ public class Tail_Format_PushTest extends TestCase {
      */
     public void testRun() throws Exception {
         System.out.println("run");
-        Tail_Format_Push instance = new Tail_Format_Push(capture);
+        Tail_Format_Push instance = new Tail_Format_Push();
+        instance.setCapture(capture);
         instance.setSource_filename( "test/sample.log" );
         instance.setExtract_filename( "test/capture.txt" );
         instance.setCsv_filename( "test/capture.csv" );

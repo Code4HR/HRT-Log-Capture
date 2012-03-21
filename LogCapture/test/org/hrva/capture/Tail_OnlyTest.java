@@ -57,7 +57,8 @@ public class Tail_OnlyTest extends TestCase {
      */
     public void testRun() throws Exception {
         System.out.println("run");
-        Tail_Only instance = new Tail_Only(capture);
+        Tail_Only instance = new Tail_Only();
+        instance.setCapture(capture);
         instance.setSource_filename("test/sample.log");
         instance.setExtract_filename("test/capture.txt");
         instance.run();
@@ -77,7 +78,8 @@ public class Tail_OnlyTest extends TestCase {
     public void testSetCsv_filename() {
         System.out.println("setCsv_filename");
         String csv_filename = "test/capture.csv";
-        Tail_Only instance = new Tail_Only(capture);
+        Tail_Only instance = new Tail_Only();
+        instance.setCapture(capture);
         instance.setCsv_filename(csv_filename);
         assertEquals( null, instance.extract_filename );
     }
@@ -88,7 +90,8 @@ public class Tail_OnlyTest extends TestCase {
     public void testSetExtract_filename() {
         System.out.println("setExtract_filename");
         String extract_filename = "test/capture.txt";
-        Tail_Only instance = new Tail_Only(capture);
+        Tail_Only instance = new Tail_Only();
+        instance.setCapture(capture);
         instance.setExtract_filename(extract_filename);
         assertEquals( extract_filename, instance.extract_filename );
     }
@@ -99,7 +102,8 @@ public class Tail_OnlyTest extends TestCase {
     public void testSetSource_filename() {
         System.out.println("setSource_filename");
         String source_filename = "test/sample.log";
-        Tail_Only instance = new Tail_Only(capture);
+        Tail_Only instance = new Tail_Only();
+        instance.setCapture(capture);
         instance.setSource_filename(source_filename);
         assertEquals( source_filename, instance.source_filename );
     }
