@@ -70,12 +70,12 @@
                 a file, doing nothing additional.
                 </p>
                 <p>The following command starts the default capture process that 
-                    captures the changes to the log file each minute.
+                    captures the changes to the log file each minute and does nothing more.
                 </p>
                 <code>java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.Capture /path/to/spysocket.log</code>
-                <p>The following command uses the <code>-t</code> option to start a tail-only capture process.
+                <p>The following command uses the <code>-t Tail_Format_Push</code> option to set the task to be a complete capture process.
                 </p>
-                <code>java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.Capture -t /path/to/spysocket.log</code>
+                <code>java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.Capture -t Tail_Format_Push /path/to/spysocket.log</code>
                 <p>Both examples run indefinitely on a one-minute interval.</p>
             </li>
             <li>
@@ -136,7 +136,8 @@ java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.CouchPush -m vehicle -e
                 <p><b>Options</b></p>
                 <dl>
                     <dt>-1</dt><dd>Run one cycle only, don't repeat forever.</dd>
-                    <dt>-t</dt><dd>Tail-only.  Do no format or push.</dd>
+                    <dt>-t <i>task class</i></dt><dd>Task to be executed.  
+                        Either <code>Tail_Format_Push</code> or <code>Tail_Only</code>.</dd>
                     <dt>-v</dt><dd>Verbose debugging</dd>
                 </dl>
                 <p><b>Arguments</b></p>
@@ -197,8 +198,9 @@ java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.CouchPush -m vehicle -e
             </dl>
             <p><b>Mapping Options</b></p>
             <dl>
-                <dt>-m type</dt><dd>The type of mapping, choices include vehicle, route and stop.</dd>
-                <dt>-e yyyy-mm-dd</dt><dd>The effective date.</dd>
+                <dt>-m <i>type</i></dt><dd>The type of mapping.
+                    Choices include <tt>vehicle</tt>, <tt>route</tt> and <tt>stop</tt>.</dd>
+                <dt>-e <i>yyyy-mm-dd</i></dt><dd>The effective date.</dd>
                 <dt>-v</dt><dd>Verbose debugging</dd>
             </dl>
             <p><b>Arguments</b></p>
@@ -241,7 +243,7 @@ java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.CouchPush -m vehicle -e
             </p>
             <p><b>Options</b></p>
             <dl>
-                <dt>-o filename</dt><dd>The output filename to write.</dd>
+                <dt>-o <i>filename</i></dt><dd>The output filename to write.</dd>
                 <dt>-v</dt><dd>Verbose debugging</dd>
             </dl>
             <p><b>Arguments</b></p>
@@ -293,7 +295,7 @@ java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.CouchPush -m vehicle -e
             </p>
             <p><b>Options</b></p>
             <dl>
-                <dt>-o filename</dt><dd>The output filename to write.</dd>
+                <dt>-o <i>filename</i></dt><dd>The output filename to write.</dd>
                 <dt>-v</dt><dd>Verbose debugging</dd>
             </dl>
             <p><b>Arguments</b></p>
@@ -322,10 +324,10 @@ java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.CouchPush -m vehicle -e
         <p>For overviews, tutorials, examples, guides, and tool documentation, please see:</p>
         <ul>
             <li><a href="https://github.com/mbreese/couchdb4j">CouchDB4J</a></li>
-            <li>org.apache.commons.httpclient from <a href="http://hc.apache.org/index.html">hc.apache.org</a></li>
             <li>org.apache.commons.cli from <a href="http://commons.apache.org/cli/">commons.apache.org/cli</a></li>
             <li>org.json.simple from <a href="http://code.google.com/p/json-simple/">code.google.com</a></li>
         </ul>
+        <p>CouchDB4J includes several other dependencies.</p>
 
         <h2>License</h2>
         <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/88x31.png" /></a><br />This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">work</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0 Unported License</a>.

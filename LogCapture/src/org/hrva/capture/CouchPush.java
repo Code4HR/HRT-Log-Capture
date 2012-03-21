@@ -280,8 +280,9 @@ public class CouchPush {
      * </code>
      * 
      * @param attachment the File to push
-     * @return Document object that was created.
-     * @throws FileNotFoundException  
+     * @throws FileNotFoundException
+     * @throws org.hrva.capture.CouchPush.DBException 
+     * @throws IOException  
      */
     public void push_feed(File attachment) throws FileNotFoundException, DBException, IOException {
         Date modified = new Date(attachment.lastModified());
@@ -308,8 +309,9 @@ public class CouchPush {
      * @param mapping type of mapping; generally vehicle, route or stop. 
      * @param effective effective date string in the form yyyy-mm-dd.
      * @param attachment the File to push
-     * @return Document object that was created.
-     * @throws FileNotFoundException  
+     * @throws FileNotFoundException
+     * @throws org.hrva.capture.CouchPush.DBException 
+     * @throws IOException  
      */
     public void push_mapping(String mapping, String effective, File attachment) throws FileNotFoundException, DBException, IOException {
         Date modified = new Date(attachment.lastModified());
@@ -329,7 +331,9 @@ public class CouchPush {
      *  this is updated it id and rev.
      * @param name the attachment name (generally feed or content)
      * @param attachment a Reader for a File to attach
-     * @return  True if the push was successful.
+     * @throws org.hrva.capture.CouchPush.DBException 
+     * @throws FileNotFoundException 
+     * @throws IOException  
      */
     public void push(Document document, String name, Reader attachment) throws DBException, FileNotFoundException, IOException {
         try {

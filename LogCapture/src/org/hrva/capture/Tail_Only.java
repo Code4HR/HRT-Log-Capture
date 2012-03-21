@@ -19,11 +19,17 @@ public class Tail_Only extends CaptureWorker {
     String source_filename;
     String extract_filename;
     String csv_filename;
-    private final Capture capture;
     LogTail tail;
 
-    Tail_Only(final Capture capture) {
+    Tail_Only() {
         super();
+    }
+    
+    /**
+     * @param capture the capture to set
+     */
+    @Override
+    public void setCapture(Capture capture) {
         this.capture = capture;
         tail = new LogTail(capture.global);
     }

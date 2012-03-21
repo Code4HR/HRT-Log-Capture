@@ -4,7 +4,6 @@
  */
 package org.hrva.capture;
 
-import com.fourspaces.couchdb.Document;
 import java.io.*;
 import java.text.MessageFormat;
 
@@ -17,23 +16,30 @@ import java.text.MessageFormat;
  *
  * @author slott
  */
-class Tail_Format_Push extends CaptureWorker {
+public class Tail_Format_Push extends CaptureWorker {
 
     String source_filename;
     String extract_filename;
     String csv_filename;
-    private final Capture capture;
     LogTail tail;
     Reformat reformat;
     CouchPush push;
 
-    Tail_Format_Push(final Capture capture) {
+    Tail_Format_Push() {
         super();
+    }
+    
+    /**
+     * @param capture the capture to set
+     */
+    @Override
+    public void setCapture(Capture capture) {
         this.capture = capture;
         tail = new LogTail(capture.global);
         reformat = new Reformat(capture.global);
         push = new CouchPush(capture.global);
     }
+
 
     @Override
     public void setCsv_filename(String csv_filename) {
@@ -71,14 +77,18 @@ class Tail_Format_Push extends CaptureWorker {
             try {
                 capture.logger.info(MessageFormat.format("Reformatting {1} to {2}", details));
                 reformat.reformat(extract, wtr);
+            } catch( Exception ex ) {
+                capture.logger.error("Reformat: " + ex.toString() );
             } finally {
                 wtr.close();
             }
             capture.logger.debug("About to push " + csv_filename);
             push.open();
-            Document doc = push.push_feed(csv_file);
-            if (doc == null) {
-                capture.logger.error("Couch Push Failed.");
+            try {
+                push.push_feed(csv_file);
+            }
+            catch( Exception ex ) {
+                capture.logger.error("CouchPush: " + ex.toString() );
                 cancel();
             }
         } catch (Exception ex) {
