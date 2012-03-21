@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="MacBookPro-SLott-9.local" name="org.hrva.capture.LogTailTest" tests="5" time="0.309" timestamp="2012-03-09T14:46:50">
+<testsuite errors="0" failures="0" hostname="MacBookPro-SLott-9.local" name="org.hrva.capture.LogTailTest" tests="5" time="0.221" timestamp="2012-03-21T13:25:46">
   <properties>
     <property name="netbeans.autoupdate.country" value="US" />
-    <property name="javac.test.classpath" value="../couchdb4j/target/couchdb4j-0.3.0-i386-1.jar:../args4j-2.0.16.jar:../couchdb4j/lib/commons-beanutils.jar:../couchdb4j/lib/commons-codec-1.3.jar:../couchdb4j/lib/commons-collections.jar:../couchdb4j/lib/commons-lang.jar:../couchdb4j/lib/commons-logging-1.1.jar:../couchdb4j/lib/ezmorph-1.0.3.jar:../couchdb4j/lib/httpclient-4.0-beta2.jar:../couchdb4j/lib/httpcore-4.0-beta2.jar:../couchdb4j/lib/json-lib-2.2.3-MODIFIED-jdk15.jar:build/classes:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/junit-3.8.2.jar" />
+    <property name="javac.test.classpath" value="../couchdb4j/target/couchdb4j-0.3.0-i386-1.jar:../commons-cli-1.2/commons-cli-1.2.jar:../couchdb4j/lib/commons-beanutils.jar:../couchdb4j/lib/commons-codec-1.3.jar:../couchdb4j/lib/commons-collections.jar:../couchdb4j/lib/commons-lang.jar:../couchdb4j/lib/commons-logging-1.1.jar:../couchdb4j/lib/ezmorph-1.0.3.jar:../couchdb4j/lib/httpclient-4.0-beta2.jar:../couchdb4j/lib/httpcore-4.0-beta2.jar:../couchdb4j/lib/json-lib-2.2.3-MODIFIED-jdk15.jar:build/classes:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/junit-3.8.2.jar" />
     <property name="libs.junit.javadoc" value="/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/docs/junit-3.8.2-api.zip" />
     <property name="ant.core.lib" value="/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/ant/lib/ant.jar" />
     <property name="javadoc.windowtitle" value="HRT Log Capture" />
@@ -43,7 +43,7 @@
     <property name="copylibs.rebase" value="true" />
     <property name="manifest.available+main.class" value="true" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner org.hrva.capture.LogTailTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build/test/results/TEST-org.hrva.capture.LogTailTest.xml crashfile=/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build/junitvmwatcher5934289624657588462.properties propsfile=/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build/junit1369080273568763570.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner org.hrva.capture.LogTailTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build/test/results/TEST-org.hrva.capture.LogTailTest.xml crashfile=/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build/junitvmwatcher8006754012815206558.properties propsfile=/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build/junit8288432144295878762.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="jnlp.descriptor" value="application" />
@@ -54,7 +54,7 @@
     <property name="user.country" value="US" />
     <property name="manifest.file" value="manifest.mf" />
     <property name="javadoc.encoding" value="UTF-8" />
-    <property name="javac.classpath" value="../couchdb4j/target/couchdb4j-0.3.0-i386-1.jar:../args4j-2.0.16.jar:../couchdb4j/lib/commons-beanutils.jar:../couchdb4j/lib/commons-codec-1.3.jar:../couchdb4j/lib/commons-collections.jar:../couchdb4j/lib/commons-lang.jar:../couchdb4j/lib/commons-logging-1.1.jar:../couchdb4j/lib/ezmorph-1.0.3.jar:../couchdb4j/lib/httpclient-4.0-beta2.jar:../couchdb4j/lib/httpcore-4.0-beta2.jar:../couchdb4j/lib/json-lib-2.2.3-MODIFIED-jdk15.jar" />
+    <property name="javac.classpath" value="../couchdb4j/target/couchdb4j-0.3.0-i386-1.jar:../commons-cli-1.2/commons-cli-1.2.jar:../couchdb4j/lib/commons-beanutils.jar:../couchdb4j/lib/commons-codec-1.3.jar:../couchdb4j/lib/commons-collections.jar:../couchdb4j/lib/commons-lang.jar:../couchdb4j/lib/commons-logging-1.1.jar:../couchdb4j/lib/ezmorph-1.0.3.jar:../couchdb4j/lib/httpclient-4.0-beta2.jar:../couchdb4j/lib/httpcore-4.0-beta2.jar:../couchdb4j/lib/json-lib-2.2.3-MODIFIED-jdk15.jar" />
     <property name="debug-transport" value="dt_socket" />
     <property name="netbeans.system_http_non_proxy_hosts" value="" />
     <property name="netbeans.home" value="/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/platform" />
@@ -79,7 +79,7 @@
     <property name="file.separator" value="/" />
     <property name="libs.junit_4.maven-pom" value="" />
     <property name="mkdist.disabled" value="false" />
-    <property name="javac.test.processorpath" value="../couchdb4j/target/couchdb4j-0.3.0-i386-1.jar:../args4j-2.0.16.jar:../couchdb4j/lib/commons-beanutils.jar:../couchdb4j/lib/commons-codec-1.3.jar:../couchdb4j/lib/commons-collections.jar:../couchdb4j/lib/commons-lang.jar:../couchdb4j/lib/commons-logging-1.1.jar:../couchdb4j/lib/ezmorph-1.0.3.jar:../couchdb4j/lib/httpclient-4.0-beta2.jar:../couchdb4j/lib/httpcore-4.0-beta2.jar:../couchdb4j/lib/json-lib-2.2.3-MODIFIED-jdk15.jar:build/classes:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/junit-3.8.2.jar" />
+    <property name="javac.test.processorpath" value="../couchdb4j/target/couchdb4j-0.3.0-i386-1.jar:../commons-cli-1.2/commons-cli-1.2.jar:../couchdb4j/lib/commons-beanutils.jar:../couchdb4j/lib/commons-codec-1.3.jar:../couchdb4j/lib/commons-collections.jar:../couchdb4j/lib/commons-lang.jar:../couchdb4j/lib/commons-logging-1.1.jar:../couchdb4j/lib/ezmorph-1.0.3.jar:../couchdb4j/lib/httpclient-4.0-beta2.jar:../couchdb4j/lib/httpcore-4.0-beta2.jar:../couchdb4j/lib/json-lib-2.2.3-MODIFIED-jdk15.jar:build/classes:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/junit-3.8.2.jar" />
     <property name="netbeans.buildnumber" value="201203012225" />
     <property name="libs.JWSAntTasks.javadoc" value="" />
     <property name="build.generated.sources.dir" value="build/generated-sources" />
@@ -113,7 +113,7 @@
     <property name="application.vendor" value="slott" />
     <property name="manifest.available" value="true" />
     <property name="libs.spring-framework300.maven-pom" value="" />
-    <property name="run.test.classpath" value="../couchdb4j/target/couchdb4j-0.3.0-i386-1.jar:../args4j-2.0.16.jar:../couchdb4j/lib/commons-beanutils.jar:../couchdb4j/lib/commons-codec-1.3.jar:../couchdb4j/lib/commons-collections.jar:../couchdb4j/lib/commons-lang.jar:../couchdb4j/lib/commons-logging-1.1.jar:../couchdb4j/lib/ezmorph-1.0.3.jar:../couchdb4j/lib/httpclient-4.0-beta2.jar:../couchdb4j/lib/httpcore-4.0-beta2.jar:../couchdb4j/lib/json-lib-2.2.3-MODIFIED-jdk15.jar:build/classes:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/junit-3.8.2.jar:build/test/classes" />
+    <property name="run.test.classpath" value="../couchdb4j/target/couchdb4j-0.3.0-i386-1.jar:../commons-cli-1.2/commons-cli-1.2.jar:../couchdb4j/lib/commons-beanutils.jar:../couchdb4j/lib/commons-codec-1.3.jar:../couchdb4j/lib/commons-collections.jar:../couchdb4j/lib/commons-lang.jar:../couchdb4j/lib/commons-logging-1.1.jar:../couchdb4j/lib/ezmorph-1.0.3.jar:../couchdb4j/lib/httpclient-4.0-beta2.jar:../couchdb4j/lib/httpcore-4.0-beta2.jar:../couchdb4j/lib/json-lib-2.2.3-MODIFIED-jdk15.jar:build/classes:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/junit-3.8.2.jar:build/test/classes" />
     <property name="ant.project.invoked-targets" value="test" />
     <property name="libs.swing-layout.javadoc" value="/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/platform/docs/swing-layout-1.0.4-doc.zip" />
     <property name="libs.ejb3-persistence.maven-pom" value="" />
@@ -137,7 +137,7 @@
     <property name="javadoc.preview" value="true" />
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16" />
     <property name="java.home" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home" />
-    <property name="debug.test.classpath" value="../couchdb4j/target/couchdb4j-0.3.0-i386-1.jar:../args4j-2.0.16.jar:../couchdb4j/lib/commons-beanutils.jar:../couchdb4j/lib/commons-codec-1.3.jar:../couchdb4j/lib/commons-collections.jar:../couchdb4j/lib/commons-lang.jar:../couchdb4j/lib/commons-logging-1.1.jar:../couchdb4j/lib/ezmorph-1.0.3.jar:../couchdb4j/lib/httpclient-4.0-beta2.jar:../couchdb4j/lib/httpcore-4.0-beta2.jar:../couchdb4j/lib/json-lib-2.2.3-MODIFIED-jdk15.jar:build/classes:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/junit-3.8.2.jar:build/test/classes" />
+    <property name="debug.test.classpath" value="../couchdb4j/target/couchdb4j-0.3.0-i386-1.jar:../commons-cli-1.2/commons-cli-1.2.jar:../couchdb4j/lib/commons-beanutils.jar:../couchdb4j/lib/commons-codec-1.3.jar:../couchdb4j/lib/commons-collections.jar:../couchdb4j/lib/commons-lang.jar:../couchdb4j/lib/commons-logging-1.1.jar:../couchdb4j/lib/ezmorph-1.0.3.jar:../couchdb4j/lib/httpclient-4.0-beta2.jar:../couchdb4j/lib/httpcore-4.0-beta2.jar:../couchdb4j/lib/json-lib-2.2.3-MODIFIED-jdk15.jar:build/classes:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/junit-3.8.2.jar:build/test/classes" />
     <property name="ant.file.type.LogCapture" value="file" />
     <property name="netbeans.importclass" value="org.netbeans.upgrade.AutoUpgrade" />
     <property name="ant.project.default-target" value="default" />
@@ -151,7 +151,7 @@
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16" />
     <property name="libs.junit_4.javadoc" value="/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/docs/junit-4.10-javadoc.jar" />
     <property name="libs.toplink.src" value="" />
-    <property name="run.classpath" value="../couchdb4j/target/couchdb4j-0.3.0-i386-1.jar:../args4j-2.0.16.jar:../couchdb4j/lib/commons-beanutils.jar:../couchdb4j/lib/commons-codec-1.3.jar:../couchdb4j/lib/commons-collections.jar:../couchdb4j/lib/commons-lang.jar:../couchdb4j/lib/commons-logging-1.1.jar:../couchdb4j/lib/ezmorph-1.0.3.jar:../couchdb4j/lib/httpclient-4.0-beta2.jar:../couchdb4j/lib/httpcore-4.0-beta2.jar:../couchdb4j/lib/json-lib-2.2.3-MODIFIED-jdk15.jar:build/classes" />
+    <property name="run.classpath" value="../couchdb4j/target/couchdb4j-0.3.0-i386-1.jar:../commons-cli-1.2/commons-cli-1.2.jar:../couchdb4j/lib/commons-beanutils.jar:../couchdb4j/lib/commons-codec-1.3.jar:../couchdb4j/lib/commons-collections.jar:../couchdb4j/lib/commons-lang.jar:../couchdb4j/lib/commons-logging-1.1.jar:../couchdb4j/lib/ezmorph-1.0.3.jar:../couchdb4j/lib/httpclient-4.0-beta2.jar:../couchdb4j/lib/httpcore-4.0-beta2.jar:../couchdb4j/lib/json-lib-2.2.3-MODIFIED-jdk15.jar:build/classes" />
     <property name="libs.hibernate-support.src" value="" />
     <property name="sun.awt.datatransfer.timeout" value="1000" />
     <property name="apple.awt.graphics.UseOpenGL" value="false" />
@@ -161,7 +161,7 @@
     <property name="javac.deprecation" value="false" />
     <property name="javadoc.use" value="true" />
     <property name="sun.java2d.noddraw" value="true" />
-    <property name="javac.processorpath" value="../couchdb4j/target/couchdb4j-0.3.0-i386-1.jar:../args4j-2.0.16.jar:../couchdb4j/lib/commons-beanutils.jar:../couchdb4j/lib/commons-codec-1.3.jar:../couchdb4j/lib/commons-collections.jar:../couchdb4j/lib/commons-lang.jar:../couchdb4j/lib/commons-logging-1.1.jar:../couchdb4j/lib/ezmorph-1.0.3.jar:../couchdb4j/lib/httpclient-4.0-beta2.jar:../couchdb4j/lib/httpcore-4.0-beta2.jar:../couchdb4j/lib/json-lib-2.2.3-MODIFIED-jdk15.jar" />
+    <property name="javac.processorpath" value="../couchdb4j/target/couchdb4j-0.3.0-i386-1.jar:../commons-cli-1.2/commons-cli-1.2.jar:../couchdb4j/lib/commons-beanutils.jar:../couchdb4j/lib/commons-codec-1.3.jar:../couchdb4j/lib/commons-collections.jar:../couchdb4j/lib/commons-lang.jar:../couchdb4j/lib/commons-logging-1.1.jar:../couchdb4j/lib/ezmorph-1.0.3.jar:../couchdb4j/lib/httpclient-4.0-beta2.jar:../couchdb4j/lib/httpcore-4.0-beta2.jar:../couchdb4j/lib/json-lib-2.2.3-MODIFIED-jdk15.jar" />
     <property name="javac.compilerargs" value="" />
     <property name="ant.file" value="/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build.xml" />
     <property name="libs.beans-binding.maven-pom" value="" />
@@ -184,7 +184,7 @@
     <property name="file.reference.ezmorph-1.0.3.jar" value="../couchdb4j/lib/ezmorph-1.0.3.jar" />
     <property name="sun.boot.library.path" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Libraries" />
     <property name="have.sources" value="true" />
-    <property name="debug.classpath" value="../couchdb4j/target/couchdb4j-0.3.0-i386-1.jar:../args4j-2.0.16.jar:../couchdb4j/lib/commons-beanutils.jar:../couchdb4j/lib/commons-codec-1.3.jar:../couchdb4j/lib/commons-collections.jar:../couchdb4j/lib/commons-lang.jar:../couchdb4j/lib/commons-logging-1.1.jar:../couchdb4j/lib/ezmorph-1.0.3.jar:../couchdb4j/lib/httpclient-4.0-beta2.jar:../couchdb4j/lib/httpcore-4.0-beta2.jar:../couchdb4j/lib/json-lib-2.2.3-MODIFIED-jdk15.jar:build/classes" />
+    <property name="debug.classpath" value="../couchdb4j/target/couchdb4j-0.3.0-i386-1.jar:../commons-cli-1.2/commons-cli-1.2.jar:../couchdb4j/lib/commons-beanutils.jar:../couchdb4j/lib/commons-codec-1.3.jar:../couchdb4j/lib/commons-collections.jar:../couchdb4j/lib/commons-lang.jar:../couchdb4j/lib/commons-logging-1.1.jar:../couchdb4j/lib/ezmorph-1.0.3.jar:../couchdb4j/lib/httpclient-4.0-beta2.jar:../couchdb4j/lib/httpcore-4.0-beta2.jar:../couchdb4j/lib/json-lib-2.2.3-MODIFIED-jdk15.jar:build/classes" />
     <property name="javadoc.private" value="false" />
     <property name="test.src.dir" value="test" />
     <property name="ap.processors.internal" value="" />
@@ -226,6 +226,7 @@
     <property name="awt.nativeDoubleBuffering" value="true" />
     <property name="libs.junit.maven-pom" value="" />
     <property name="libs.eclipselinkmodelgen.javadoc" value="" />
+    <property name="file.reference.commons-cli-1.2.jar" value="../commons-cli-1.2/commons-cli-1.2.jar" />
     <property name="netbeans.home+have.tests" value="true" />
     <property name="annotation.processing.processor.options" value="" />
     <property name="libs.jaxb.src" value="" />
@@ -264,7 +265,6 @@
     <property name="libs.ejb3-persistence.javadoc" value="" />
     <property name="manifest.available+main.class+mkdist.available" value="true" />
     <property name="jna.platform.library.path" value="/usr/lib:/usr/lib" />
-    <property name="log4j.configuration" value="log4j.properties" />
     <property name="default.javac.target" value="1.6" />
     <property name="libs.junit_4.classpath" value="/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/platform/modules/ext/junit-4.10.jar" />
     <property name="user.timezone" value="" />
@@ -275,9 +275,8 @@
     <property name="endorsed.classpath" value="" />
     <property name="libs.absolutelayout.classpath" value="/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/AbsoluteLayout.jar:/Users/slott/Documents/Projects/HRTail/couchdb4j/lib:/Users/slott/Documents/Projects/HRTail/args4j-2.0.16.jar" />
     <property name="excludes" value="" />
-    <property name="config" value="hrtail" />
     <property name="ant.file.LogCapture" value="/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build.xml" />
-    <property name="java.class.path" value="/Users/slott/Documents/Projects/HRT-Log-Capture/couchdb4j/target/couchdb4j-0.3.0-i386-1.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/args4j-2.0.16.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/couchdb4j/lib/commons-beanutils.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/couchdb4j/lib/commons-codec-1.3.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/couchdb4j/lib/commons-collections.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/couchdb4j/lib/commons-lang.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/couchdb4j/lib/commons-logging-1.1.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/couchdb4j/lib/ezmorph-1.0.3.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/couchdb4j/lib/httpclient-4.0-beta2.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/couchdb4j/lib/httpcore-4.0-beta2.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/couchdb4j/lib/json-lib-2.2.3-MODIFIED-jdk15.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build/classes:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/junit-3.8.2.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build/test/classes:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/ant/lib/ant-launcher.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/ant/lib/ant.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/ant/lib/ant-junit.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/ant/lib/ant-junit4.jar" />
+    <property name="java.class.path" value="/Users/slott/Documents/Projects/HRT-Log-Capture/couchdb4j/target/couchdb4j-0.3.0-i386-1.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/commons-cli-1.2/commons-cli-1.2.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/couchdb4j/lib/commons-beanutils.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/couchdb4j/lib/commons-codec-1.3.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/couchdb4j/lib/commons-collections.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/couchdb4j/lib/commons-lang.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/couchdb4j/lib/commons-logging-1.1.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/couchdb4j/lib/ezmorph-1.0.3.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/couchdb4j/lib/httpclient-4.0-beta2.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/couchdb4j/lib/httpcore-4.0-beta2.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/couchdb4j/lib/json-lib-2.2.3-MODIFIED-jdk15.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build/classes:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/junit-3.8.2.jar:/Users/slott/Documents/Projects/HRT-Log-Capture/LogCapture/build/test/classes:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/ant/lib/ant-launcher.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/ant/lib/ant.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/ant/lib/ant-junit.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/ant/lib/ant-junit4.jar" />
     <property name="apple.laf.useScreenMenuBar" value="true" />
     <property name="do.mkdist" value="true" />
     <property name="libs.absolutelayout.src" value="/Users/slott/Documents/Projects/HRTail/couchdb4j/src" />
@@ -292,7 +291,7 @@
     <property name="java.vm.vendor" value="Apple Inc." />
     <property name="libs.CopyLibs.classpath" value="/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/ant/extra/org-netbeans-modules-java-j2seproject-copylibstask.jar" />
     <property name="libs.spring-framework300.classpath" value="/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/ide/modules/org-apache-commons-logging.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/cglib-2.2.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/spring-3.0/spring-aop-3.0.6.RELEASE.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/spring-3.0/spring-asm-3.0.6.RELEASE.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/spring-3.0/spring-aspects-3.0.6.RELEASE.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/spring-3.0/spring-beans-3.0.6.RELEASE.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/spring-3.0/spring-context-3.0.6.RELEASE.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/spring-3.0/spring-context-support-3.0.6.RELEASE.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/spring-3.0/spring-core-3.0.6.RELEASE.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/spring-3.0/spring-expression-3.0.6.RELEASE.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/spring-3.0/spring-instrument-3.0.6.RELEASE.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/spring-3.0/spring-instrument-tomcat-3.0.6.RELEASE.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/spring-3.0/spring-jdbc-3.0.6.RELEASE.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/spring-3.0/spring-jms-3.0.6.RELEASE.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/spring-3.0/spring-orm-3.0.6.RELEASE.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/spring-3.0/spring-oxm-3.0.6.RELEASE.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/spring-3.0/spring-test-3.0.6.RELEASE.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/spring-3.0/spring-tx-3.0.6.RELEASE.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/spring-3.0/spring-web-3.0.6.RELEASE.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/spring-3.0/spring-webmvc-portlet-3.0.6.RELEASE.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/spring-3.0/spring-webmvc-3.0.6.RELEASE.jar:/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/spring-3.0/spring-struts-3.0.6.RELEASE.jar" />
-    <property name="run.jvmargs" value="-Dlog4j.configuration=log4j.properties" />
+    <property name="run.jvmargs" value="" />
     <property name="libs.ejb3-persistence.classpath" value="/Applications/NetBeans/NetBeans 7.1.1.app/Contents/Resources/NetBeans/java/modules/ext/hibernate/ejb3-persistence.jar" />
     <property name="libs.JAXB-ENDORSED.src" value="" />
     <property name="libs.spring-framework.javadoc" value="" />
@@ -300,8 +299,8 @@
     <property name="file.reference.commons-collections.jar" value="../couchdb4j/lib/commons-collections.jar" />
     <property name="jnlp.signing" value="" />
     <property name="libs.junit.src" value="" />
-    <property name="annotation.processing.source.output" value="build/generated-sources/ap-source-output" />
     <property name="jnlp.signed" value="false" />
+    <property name="annotation.processing.source.output" value="build/generated-sources/ap-source-output" />
     <property name="main.class" value="org.hrva.capture.Capture" />
     <property name="libs.CopyLibs.src" value="" />
     <property name="build.dir" value="build" />
@@ -311,12 +310,11 @@
     <property name="jdkBug6558476" value="false" />
     <property name="javadoc.nonavbar" value="false" />
     <property name="platform.active" value="default_platform" />
-    <property name="file.reference.args4j-2.0.16.jar" value="../args4j-2.0.16.jar" />
     <property name="awt.toolkit" value="apple.awt.CToolkit" />
   </properties>
-  <testcase classname="org.hrva.capture.LogTailTest" name="testRun_main" time="0.135" />
-  <testcase classname="org.hrva.capture.LogTailTest" name="testTail" time="0.0080" />
-  <testcase classname="org.hrva.capture.LogTailTest" name="testGet_state_none" time="0.0020" />
+  <testcase classname="org.hrva.capture.LogTailTest" name="testRun_main" time="0.07" />
+  <testcase classname="org.hrva.capture.LogTailTest" name="testTail" time="0.0030" />
+  <testcase classname="org.hrva.capture.LogTailTest" name="testGet_state_none" time="0.0010" />
   <testcase classname="org.hrva.capture.LogTailTest" name="testGet_state_exists" time="0.017" />
   <testcase classname="org.hrva.capture.LogTailTest" name="testSave_state" time="0.0010" />
   <system-out><![CDATA[run_main
@@ -325,17 +323,17 @@ testGet_state_none
 testGet_state_exists
 save_state
 ]]></system-out>
-  <system-err><![CDATA[Mar 9, 2012 9:46:51 AM org.hrva.capture.LogTail tail
+  <system-err><![CDATA[Mar 21, 2012 9:25:46 AM org.hrva.capture.LogTail tail
 INFO: Tailing test/sample.log to test/sample.extract
-Mar 9, 2012 9:46:51 AM org.hrva.capture.LogTail tail
+Mar 21, 2012 9:25:46 AM org.hrva.capture.LogTail tail
 INFO: Count 2, Bytes 8
-Mar 9, 2012 9:46:51 AM org.hrva.capture.LogTail tail
+Mar 21, 2012 9:25:46 AM org.hrva.capture.LogTail tail
 INFO: Count 3, Bytes 327
-Mar 9, 2012 9:46:51 AM org.hrva.capture.LogTail tail
+Mar 21, 2012 9:25:46 AM org.hrva.capture.LogTail tail
 INFO: Tailing test/sample.log to test/sample.extract
-Mar 9, 2012 9:46:51 AM org.hrva.capture.LogTail tail
+Mar 21, 2012 9:25:46 AM org.hrva.capture.LogTail tail
 INFO: Count 2, Bytes 8
-Mar 9, 2012 9:46:51 AM org.hrva.capture.LogTail tail
+Mar 21, 2012 9:25:46 AM org.hrva.capture.LogTail tail
 INFO: Count 3, Bytes 327
 ]]></system-err>
 </testsuite>

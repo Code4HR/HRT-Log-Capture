@@ -100,9 +100,9 @@ public class CaptureTest extends TestCase {
         double seconds = 0.0;
         
         Capture instance = new Capture(shared);
-        instance.worker.push.verbose= true;
+        CaptureWorker worker= new Tail_Format_Push(instance);
         
-        instance.capture(source, seconds);
+        instance.capture(worker, seconds, source);
         Thread.sleep(3000); // Wait
         File ext= new File( "test/capture.txt" );
         assertEquals( 327, ext.length() );
@@ -115,7 +115,9 @@ public class CaptureTest extends TestCase {
         assertEquals( "1", status.getProperty("seq.test/sample.log") );
 
         instance = new Capture(shared);
-        instance.capture(source, seconds);
+        worker= new Tail_Format_Push(instance);
+
+        instance.capture(worker, seconds, source);
         Thread.sleep(2500); // Wait
         status.load( new FileReader(history) );
         assertEquals( "327", status.getProperty("size.test/sample.log") );

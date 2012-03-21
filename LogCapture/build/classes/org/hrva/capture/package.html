@@ -23,27 +23,28 @@
 
         Captures log files that contain real time transit system status
 
-        <p>The HRTail package provides several elements of functionality for
+        <p>The HRTail package provides three essential elements of functionality for
             capturing transit system log files.
         </p>
         <ul>
-            <li><p><b>Log Tailing</b>.  The {@link org.hrva.capture.LogTail} class can be used to rapidly
+            <li><p><b>Log Tail</b>.  The {@link org.hrva.capture.LogTail} class can be used to rapidly
                     tail a log file.  It saves the previous size in a history
                     cache.  During each cycle, it compares the current
                     size of the log with the previous size and extracts
                     just the additional data.
                 </p>
             </li>
-            <li><p><b>Reformatting</b>.  The log is in a human-friendly format and
-                    must be converted to be useful.  The {@link org.hrva.capture.Reformat} class can be used to
-                    reformat the log into CSV.</p>
+            <li><p><b>Format</b>.  The log is in a human-friendly format and
+                    must be converted a more useful format.  The {@link org.hrva.capture.Reformat} class can be used to
+                    format the log into CSV.</p>
             </li>
             <li><p><b>Couch Push</b>.  The extracts, after being reformatted
                     must be pushed to the HRT couch database 
                     (<a href="http://hrt.iriscouch.com:5984/feed/">http://hrt.iriscouch.com:5984/feed/</a>)
                     for further processing.
-                    The {@link org.hrva.capture.CouchPush} class can upload the real-time feed
-                    as well as the mappings required to interpret some of the keys.
+                    The {@link org.hrva.capture.CouchPush} class is used to 
+                    push the mappings required to interpret the keys on the real-time
+                    feed.  It can also be used to upload the real-time feed itself. 
                 </p>
             </li>
         </ul>
@@ -62,13 +63,20 @@
             <li>
                 <p>
                 <b>Capture Real Time Feed</b>.  
-                The  <a href="#capture">Capture</a> application will tail a log file, 
-                extracting, transforming and loading it to a couch
-                database for access and analysis
+                The  <a href="#capture">Capture</a> application can be used in
+                two modes.  It can tail a log file, doing 
+                extract, transform and load to a couch
+                database for access and analysis.  It can also simply tail
+                a file, doing nothing additional.
                 </p>
-                <p>The following command starts the capture process/
+                <p>The following command starts the default capture process that 
+                    captures the changes to the log file each minute.
                 </p>
-                <code>java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.Capture /path/to/some.log</code>
+                <code>java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.Capture /path/to/spysocket.log</code>
+                <p>The following command uses the <code>-t</code> option to start a tail-only capture process.
+                </p>
+                <code>java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.Capture -t /path/to/spysocket.log</code>
+                <p>Both examples run indefinitely on a one-minute interval.</p>
             </li>
             <li>
                 <p>
@@ -113,15 +121,22 @@ java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.CouchPush -m vehicle -e
             <dd>{@link org.hrva.capture.Capture}</dd>
             <dt><b>Synopsis</b></dt>
             <dd>
-                <code>java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.Capture /path/to/some.log</code>
+                <code>java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.Capture /path/to/spysocket.log</code>
             </dd>
             <dt><b>Description</b></dt>
             <dd>
-                <p>Performs the three-step capture procedure; repeating at
+                <p>Performs the three-step capture procedure.
+                    This usea a timer and repeats at
                     one-minute intervals.  Forever.</p>
+                <p>Since the LogTail records the state in a history file,
+                    this application can be stopped and started without
+                    any worries about missing a piece of the log or 
+                    duplicating a piece of the log.
+                </p>
                 <p><b>Options</b></p>
                 <dl>
                     <dt>-1</dt><dd>Run one cycle only, don't repeat forever.</dd>
+                    <dt>-t</dt><dd>Tail-only.  Do no format or push.</dd>
                     <dt>-v</dt><dd>Verbose debugging</dd>
                 </dl>
                 <p><b>Arguments</b></p>
@@ -212,7 +227,7 @@ java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.CouchPush -m vehicle -e
         </dd>
         <dt><b>Synopsis</b></dt>
         <dd>
-            <tt>java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.LogTail -o extract.txt /path/to/some.log</tt>
+            <tt>java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.LogTail -o extract.txt /path/to/spysocket.log</tt>
         </dd>
         <dt><b>Description</b></dt>
         <dd>
@@ -221,10 +236,12 @@ java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.CouchPush -m vehicle -e
             Therefore, the first (and list) line of each operation are likely
             to be damaged and unusable.
             </p>
+            <p>This is a one-time operation, with no built-in timer.
+               The Capture application implements the timer.
+            </p>
             <p><b>Options</b></p>
             <dl>
                 <dt>-o filename</dt><dd>The output filename to write.</dd>
-                <dt>-f</dt><dd>Do an immediate CouchPush on this feed file without reformatting it.</dd>
                 <dt>-v</dt><dd>Verbose debugging</dd>
             </dl>
             <p><b>Arguments</b></p>
@@ -299,12 +316,14 @@ java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.CouchPush -m vehicle -e
         </ul>
 
         <h2>Related Documentation</h2>
+        
+        <p>The current release is built with JDK1.6.</p>
 
-        For overviews, tutorials, examples, guides, and tool documentation, please see:
+        <p>For overviews, tutorials, examples, guides, and tool documentation, please see:</p>
         <ul>
             <li><a href="https://github.com/mbreese/couchdb4j">CouchDB4J</a></li>
-            <li><a href="http://args4j.kohsuke.org/">Args4J</a></li>
             <li>org.apache.commons.httpclient from <a href="http://hc.apache.org/index.html">hc.apache.org</a></li>
+            <li>org.apache.commons.cli from <a href="http://commons.apache.org/cli/">commons.apache.org/cli</a></li>
             <li>org.json.simple from <a href="http://code.google.com/p/json-simple/">code.google.com</a></li>
         </ul>
 
