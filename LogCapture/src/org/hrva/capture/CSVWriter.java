@@ -15,7 +15,7 @@ import java.io.Writer;
 import java.util.Map;
 
 /**
- * Writes a CSV-formatfile using a Map<String,String> structure to provide
+ * Writes a CSV-format file using a <code>Map&lt;String,String&gt;</code> structure to provide
  * column names and values.
  * 
  * <p>
@@ -90,6 +90,9 @@ public class CSVWriter {
     
     /**
      * Writes a row to the file.
+     * <p>Additional columns are silently ignored.
+     * Missing columns are left blank.
+     * </p>
      * @param row A Map<String,String> to map Headings To Values.
      * @throws IOException
      */

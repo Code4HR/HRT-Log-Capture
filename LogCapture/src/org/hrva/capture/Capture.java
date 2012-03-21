@@ -9,17 +9,18 @@
  */
 package org.hrva.capture;
 
-import com.fourspaces.couchdb.Document;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
-import java.text.MessageFormat;
-import java.util.*;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Properties;
+import java.util.Timer;
+import org.apache.commons.cli.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.kohsuke.args4j.Argument;
-import org.kohsuke.args4j.CmdLineException;
-import org.kohsuke.args4j.CmdLineParser;
-import org.kohsuke.args4j.Option;
 
 /**
  * Combination "Wrapper" which tails a log, reformats and then pushes.
@@ -36,12 +37,15 @@ import org.kohsuke.args4j.Option;
  *      config.load(new FileInputStream(prop_file));
  *
  *      Capture instance = new Capture(config);
- *      instance.capture( "/path/to/some.log", 60.0 );
+ *      CaptureWorker worker = new Tail_Format_Push(instance);
+ *      instance.capture( worker, 60.0, "/path/to/spysocket.log" );
  * </pre></code>
+ * 
+ * <p>An alternative worker is the <code>Tail_Only</code> worker.
  *
  * <p>At the command line, it might look like this.</p>
  * <code><pre>
- * java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.Capture /path/to/some.log
+ * java -cp LogCapture/dist/LogCapture.jar org.hrva.capture.Capture /path/to/spysocket.log
  * </pre></code>
  *
  * <p>This will cycle indefinitely, capturing, reformatting and pushing extracts
@@ -61,33 +65,9 @@ public class Capture {
      */
     Properties global;
     /**
-     * Immediate Push option.
-     */
-    @Option(name = "-1", usage = "One Ping Only, Please.")
-    boolean one_time = false;
-    /**
-     * Verbose debugging.
-     */
-    @Option(name = "-v", usage = "Vebose logging")
-    boolean verbose = false;
-    /**
-     * Cycle time.
-     */
-    @Option(name = "-c", usage = "Cyclic Processing Interval, default 60 seconds")
-    double cycle_time = 60.0;
-    /**
-     * Command-line Arguments.
-     */
-    @Argument
-    List<String> arguments = new ArrayList<String>();
-    /**
      * The Scheduling timer.
      */
     Timer timer = new Timer();
-    /**
-     * The scheduled operation.
-     */
-    Tail_Format_Push worker;
     /**
      * Logger.
      */
@@ -117,7 +97,7 @@ public class Capture {
         Capture capture = new Capture(config);
         try {
             capture.run_main(args);
-        } catch (CmdLineException ex1) {
+        } catch (ParseException ex1) {
             log.fatal("Invalid Options", ex1);
         } catch (MalformedURLException ex2) {
             log.fatal("Invalid CouchDB URL", ex2);
@@ -134,7 +114,6 @@ public class Capture {
     public Capture(Properties global) {
         super();
         this.global = global;
-        worker = new Tail_Format_Push();
     }
 
     /**
@@ -147,23 +126,61 @@ public class Capture {
      *
      *
      * @param args the command line arguments
-     * @throws CmdLineException
+     * @throws ParseException 
      * @throws FileNotFoundException
      * @throws IOException
      */
-    public void run_main(String[] args) throws CmdLineException, FileNotFoundException, IOException {
-        CmdLineParser parser = new CmdLineParser(this);
-        parser.parseArgument(args);
-
-        if (arguments.size() != 1) {
-            throw new CmdLineException("Only one log file can be captured");
-        }
-        for (String source : arguments) {
-            if (one_time) {
-                capture(source, 0.0);
-            } else {
-                capture(source, cycle_time);
+    public void run_main(String[] args) throws ParseException, FileNotFoundException, IOException {
+        Option verbose= new Option( "v", "verbose", false, "Verbose logging");
+        Option one_time= new Option( "1", "onetime", false, "One time only; do not cycle");
+        Option tail_only = new Option( "t", "tailonly", false, "Tail only; do not format or push");
+        Option cycle_time = OptionBuilder.withArgName( "cycle_time" ).hasArgs(1).withDescription( "Cycle Time in seconds").create("c");
+        
+        Options options = new Options();
+        options.addOption( verbose );
+        options.addOption( one_time );
+        options.addOption( tail_only );
+        options.addOption( cycle_time );
+        
+        CommandLineParser parser = new GnuParser();
+        CommandLine line;
+        List positional_args;
+        double time_value= 60.0;
+        try {
+            // parse the command line arguments
+            line = parser.parse( options, args );
+            positional_args = line.getArgList();
+            if (positional_args.size() != 1) {
+                throw new ParseException("Only one log file can be captured");
             }
+            if (line.hasOption("1")) {
+                time_value= 0.0;
+            } else {
+                double value;
+                if( line.hasOption("c") ) {
+                    value = Double.parseDouble(line.getOptionValue("c"));
+                }
+                else {
+                    value= 60.0;
+                }
+            }
+        }
+        catch( ParseException exp ) {
+            // oops, something went wrong
+            System.err.println( "Parsing failed.  Reason: " + exp.getMessage() );
+            throw exp;
+        }
+
+        
+        CaptureWorker worker;
+        if( line.hasOption("t") )
+            worker = new Tail_Only(this);
+
+        else    
+            worker = new Tail_Format_Push(this);
+
+        for (Object source : positional_args ) {
+            capture(worker, time_value, (String)source );
         }
     }
 
@@ -173,10 +190,11 @@ public class Capture {
      * the delay for repeat scheduling. Since a push takes almost 1 second, the
      * intervals need to be fairly long. </p>
      *
+     * @param worker The CaptureWorker to use.  Can be a Tail_Format_Push instance or a Tail_Only instamnce
      * @param source Log File to capture, reformat and push.
      * @param seconds Scheduling interval in seconds. 0.0 means one-time-only.
      */
-    public void capture(String source, double seconds) {
+    public void capture(CaptureWorker worker, double seconds, String source ) {
         worker.setSource_filename(source);
         worker.setExtract_filename(global.getProperty("capture.extract_filename", "hrtrtf.txt"));
         worker.setCsv_filename(global.getProperty("capture.csv_filename", "hrtrtf.csv"));
@@ -186,79 +204,6 @@ public class Capture {
             long interval = (long) seconds * 1000;
             long current = Calendar.getInstance().get(Calendar.SECOND);
             timer.scheduleAtFixedRate(worker, (60 - current) * 1000, interval);
-        }
-    }
-
-    /**
-     * TimerTask used to handle cycling log capture process.
-     */
-    class Tail_Format_Push extends TimerTask {
-
-        Timer timer;
-        String source_filename;
-        String extract_filename;
-        String csv_filename;
-
-        public void setCsv_filename(String csv_filename) {
-            this.csv_filename = csv_filename;
-        }
-
-        public void setExtract_filename(String extract_filename) {
-            this.extract_filename = extract_filename;
-        }
-
-        public void setSource_filename(String source_filename) {
-            this.source_filename = source_filename;
-        }
-        LogTail tail = new LogTail(global);
-        Reformat reformat = new Reformat(global);
-        CouchPush push = new CouchPush(global);
-
-        Tail_Format_Push() {
-            super();
-        }
-
-        /**
-         * Run the timer task. <p> This performs the standard three-step
-         * capture. </p> <ol> <li>LogTail</li> <li>Reformat</li>
-         * <li>CouchPush</li> </ol>
-         */
-        @Override
-        public void run() {
-            try {
-                String created = tail.tail(source_filename, extract_filename);
-
-                if (created == null) {
-                    return;
-                }
-
-                Reader extract = new FileReader(new File(created));
-                File csv_file = new File(csv_filename);
-                Writer wtr = new FileWriter(csv_file, false);
-                reformat.include_header = true;
-                try {
-                    Object[] details = {extract_filename, csv_filename};
-                    logger.info(MessageFormat.format("Reformatting {0} to {1}", details));
-
-                    reformat.reformat(extract, wtr);
-                } finally {
-                    wtr.close();
-                }
-
-                logger.debug("About to push " + csv_filename);
-                push.open();
-                Document doc = push.push_feed(csv_file);
-                if (doc == null) {
-                    logger.error("Couch Push Failed.");
-                    cancel();
-                    return;
-                }
-                
-            } catch (Exception ex) {
-                logger.fatal("Worker Failed", ex);
-                cancel();
-                throw new Error(ex);
-            }
         }
     }
 }

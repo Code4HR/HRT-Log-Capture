@@ -4,23 +4,22 @@
  */
 package org.hrva.capture;
 
-import com.fourspaces.couchdb.Database;
+import com.fourspaces.couchdb.Database; 
 import com.fourspaces.couchdb.Document;
 import com.fourspaces.couchdb.Session;
 import java.io.*;
-import org.kohsuke.args4j.Argument;
-import org.kohsuke.args4j.CmdLineException;
-import org.kohsuke.args4j.CmdLineParser;
-import org.kohsuke.args4j.Option;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.MessageFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
-import org.apache.commons.logging.Log; 
-import org.apache.commons.logging.LogFactory; 
+import java.util.Date;
+import java.util.List;
+import java.util.Properties;
+import java.util.TimeZone;
+import org.apache.commons.cli.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Push HRT Feeds or Mappings to the CouchDB.
@@ -83,26 +82,6 @@ public class CouchPush {
     // Used to format timestamps in GMT.
     private DateFormat fmt_date_time;
     
-    /** For feeds, simply provide -f option. */
-    @Option(name = "-f", usage = "Feed")
-    boolean feed= false;
-    
-    /** For mappings, provide -m <i>type</i>. */
-    @Option(name = "-m", usage = "Mapping Type (one of vehicle, route, stop)")
-    String mapping = null;
-    
-    /** For mappings, provide -e <i>yyyy-mm-dd</i> effective date. */
-    @Option(name = "-e", usage = "Effective Date yyyy-mm-dd")
-    String effective = null;
-    
-    /** Verbose debugging. */
-    @Option(name = "-v", usage = "Vebose logging")
-    boolean verbose= false;
-
-    /** Command-line Arguments. */
-    @Argument
-    List<String> arguments = new ArrayList<String>();
-
     /** Used to parse dates. */
     DateFormat fmt_date = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -130,7 +109,7 @@ public class CouchPush {
         CouchPush cp = new CouchPush( config);
         try {
             cp.run_main(args);
-        } catch (CmdLineException ex1) {
+        } catch (org.apache.commons.cli.ParseException ex1) {
             log.fatal("Invalid Options", ex1);
         } catch (MalformedURLException ex2) {
             log.fatal("Invalid CouchDB URL", ex2);
@@ -169,42 +148,67 @@ public class CouchPush {
      * </dl>
      * <p>This gets properties from the <tt>hrtail.properties</tt> file.</p>
      * @param args
-     * @throws CmdLineException
+     * @throws org.apache.commons.cli.ParseException 
      * @throws MalformedURLException
      * @throws IOException  
      */
-    public void run_main(String[] args) throws CmdLineException, MalformedURLException, IOException {
-        CmdLineParser parser = new CmdLineParser(this);
-        parser.parseArgument(args);
-                
-        if (feed) {
-            if (mapping != null || effective != null) {
-                throw new CmdLineException("Cannot use both -f and -m/-e options.");
+    public void run_main(String[] args) throws org.apache.commons.cli.ParseException, MalformedURLException, IOException {
+
+        Option verbose = new Option("v", "verbose", false, "Verbose logging");
+        Option feed = new Option("f", "feed", false, "Push a new Real-Time Feed");
+        Option mapping = OptionBuilder.withArgName("mapping").hasArgs(1).withDescription("Mapping Type (one of vehicle, route, stop)").create("m");
+        Option effective = OptionBuilder.withArgName("effective").hasArgs().withDescription("Effective Date yyyy-mm-dd").create("e");
+
+        Options options = new Options();
+        options.addOption(verbose);
+        options.addOption(feed);
+        options.addOption(mapping);
+        options.addOption(effective);
+
+        CommandLineParser parser = new GnuParser();
+        CommandLine line;
+        List positional_args;
+        String mapping_type = "";
+        String effective_date = "";
+        try {
+            // parse the command line arguments
+            line = parser.parse(options, args);
+            positional_args = line.getArgList();
+            if (positional_args.size() != 1) {
+                throw new org.apache.commons.cli.ParseException("One file must be named");
             }
-        } else {
-            if (mapping == null || effective == null) {
-                throw new CmdLineException("Mapping must have -m type and -e yyyy-mm-dd");
+            if (line.hasOption("f")) {
+                if (line.hasOption("m") || line.hasOption("e")) {
+                    throw new org.apache.commons.cli.ParseException("Cannot use both -f and -m/-e options.");
+                }
+            } else {
+                if (!line.hasOption("m") || !line.hasOption("e")) {
+                    throw new org.apache.commons.cli.ParseException("Mapping must have both -m type and -e yyyy-mm-dd");
+                }
+                try {
+                    Date eff_temp = fmt_date.parse(line.getOptionValue("e"));
+                } catch (java.text.ParseException ex) {
+                    throw new org.apache.commons.cli.ParseException("Invalid effective date format");
+                }
+                effective_date = line.getOptionValue("e");
+                mapping_type = line.getOptionValue("m");
             }
-            try {
-                Date eff_dt = fmt_date.parse(effective);
-            } catch (ParseException ex) {
-                throw new CmdLineException("Invalid effective date format");
-            }
+        } catch (org.apache.commons.cli.ParseException exp) {
+            // oops, something went wrong
+            System.err.println("Parsing failed.  Reason: " + exp.getMessage());
+            throw exp;
         }
 
-        if (arguments.isEmpty()) {
-            throw new CmdLineException("Missing file name");
-        }
 
         open();
 
-        for (String filename : arguments) {
+        for (Object filename : positional_args) {
             Object[] details = {
                 mapping, effective, filename, s.getHost(), db.getName()
             };
-            File attachment= new File(filename);
+            File attachment= new File((String)filename);
             Document doc;
-            if (feed) {
+            if (line.hasOption("f")) {
                 String msg = MessageFormat.format( 
                         "Push Feed {2} to {3}/{4}", details );
                 logger.info( msg );
@@ -213,7 +217,7 @@ public class CouchPush {
                 String msg = MessageFormat.format(
                         "Push {0} Mapping {2} to {3}/{4}", details );
                 logger.info(msg);
-                doc= push_mapping(mapping, effective, attachment);
+                doc= push_mapping(mapping_type, effective_date, attachment);
             }
             if( doc != null ) {
                 logger.info("Created " + doc.getId());
@@ -322,9 +326,7 @@ public class CouchPush {
             db.saveDocument(document);
             String id = (String) document.getId();
             String rev1 = (String) document.getRev();
-            if( verbose ) {
-                logger.debug( document );
-            }
+            logger.debug( document );
 
             StringBuilder content = new StringBuilder();
             String line = rdr.readLine();
@@ -333,9 +335,7 @@ public class CouchPush {
                 line = rdr.readLine();
             }
             Document resp= db.putAttachment(id, rev1, name, "text/csv", content.toString());
-            if( verbose ) {
-                logger.debug( resp );
-            }
+            logger.debug( resp );
             return resp.getBoolean("ok");
             
         } catch (java.io.FileNotFoundException ex1) {

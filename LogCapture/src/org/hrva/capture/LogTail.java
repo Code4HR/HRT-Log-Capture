@@ -12,15 +12,12 @@ package org.hrva.capture;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.text.MessageFormat;
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
+import org.apache.commons.cli.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.kohsuke.args4j.Argument;
-import org.kohsuke.args4j.CmdLineException;
-import org.kohsuke.args4j.CmdLineParser;
-import org.kohsuke.args4j.Option;
 
 /**
  * Tail a rapidly growing log file and push an HRT Feeds to the CouchDB.
@@ -31,16 +28,13 @@ import org.kohsuke.args4j.Option;
  * <p>Typical use case</p>
  * <code><pre>
  *     LogTail lt = new LogTail();
- *     lt.tail( "/path/to/some.log", "extract.txt" );
- *     CouchPush cp= new CouchPush()
- *     cp.open();
- *     cp.push_feed( "extract.txt" );
- *     System.out.print( "Created "+cp.id );
+ *     lt.tail( "/path/to/spysocket.log", "extract.txt" );
+ *     System.out.print( "Created "extract.txt" );
  * </pre></code>
  *
  * <p>At the command line, it might look like this.</p> 
  * <code><pre>
- * java -cp LogTail/dist/LogTail.jar org.hrva.capture.LogTail -o extract.txt /path/to/some.log
+ * java -cp LogTail/dist/LogTail.jar org.hrva.capture.LogTail -o extract.txt /path/to/spysocket.log
  * java -cp LogTail/dist/LogTail.jar org.hrva.capture.CouchPush -f extract.txt 
  * </pre></code>
  * 
@@ -51,22 +45,6 @@ public class LogTail {
     /** Properties for this application. */
     Properties global = new Properties();
     
-    /** Output file name. */
-    @Option(name="-o", usage="Output file name.")
-    String extract_filename="hrtrtf.txt";
-    
-    /** Immediate Push option. */
-    @Option(name="-f", usage="Do an immediate feed push.")
-    boolean immediate= false;
-    
-    /** Verbose debugging. */
-    @Option(name = "-v", usage = "Vebose logging")
-    boolean verbose= false;
-
-    /** Command-line Arguments. */
-    @Argument
-    List<String> arguments = new ArrayList<String>();
-
     /** Logger. */
     final Log  logger = LogFactory.getLog(LogTail.class);
 
@@ -93,7 +71,7 @@ public class LogTail {
         LogTail lt = new LogTail(config);
         try {
             lt.run_main(args);
-        } catch (CmdLineException ex1) {
+        } catch (ParseException ex1) {
             log.fatal("Invalid Options", ex1);
         } catch (MalformedURLException ex2) {
             log.fatal("Invalid CouchDB URL", ex2);
@@ -121,22 +99,42 @@ public class LogTail {
      * couchdb.</li>  </ol>
      *
      * @param args the command line arguments
-     * @throws CmdLineException
+     * @throws ParseException 
      * @throws FileNotFoundException
      * @throws IOException
      */
-    public void run_main(String[] args) throws CmdLineException, FileNotFoundException, IOException {
-        CmdLineParser parser = new CmdLineParser(this);
-        parser.parseArgument(args);
+    public void run_main(String[] args) throws ParseException, FileNotFoundException, IOException {
+    
+        Option verbose = new Option("v", "verbose", false, "Verbose logging");
+        Option output = OptionBuilder.withArgName("outputfile").hasArgs(1).withDescription("Output File Name").create("o");
 
-        if (arguments.size() != 1) {
-            throw new CmdLineException("Only one log file can be tailed");
-        }
-        for (String source : arguments) {
-            String temp = tail(source, extract_filename);
-            if (temp != null && immediate) {
-                push_feed(temp);
+        Options options = new Options();
+        options.addOption(verbose);
+        options.addOption(output);
+
+        CommandLineParser parser = new GnuParser();
+        CommandLine line;
+        List positional_args;
+        String extract_filename="hrtrtf.txt";
+        
+        try {
+            // parse the command line arguments
+            line = parser.parse(options, args);
+            positional_args = line.getArgList();
+            if (positional_args.size() != 1) {
+                throw new org.apache.commons.cli.ParseException("One file must be named");
             }
+            if (line.hasOption("o")) {
+                extract_filename= line.getOptionValue("o");
+            }
+        } catch (org.apache.commons.cli.ParseException exp) {
+            // oops, something went wrong
+            System.err.println("Parsing failed.  Reason: " + exp.getMessage());
+            throw exp;
+        }
+
+        for (Object source : positional_args) {
+            String temp = tail((String)source, extract_filename);
         }
     }
 
@@ -224,7 +222,8 @@ public class LogTail {
                 position = rdr.getFilePointer();
 
                 // Write temp file
-                Object[] args = { sequence };
+                Calendar cal= Calendar.getInstance();
+                Object[] args = { sequence, cal.get(Calendar.HOUR), cal.get(Calendar.MINUTE) };
                 temp_name = MessageFormat.format(target, args);
 
                 File extract = new File(temp_name);
@@ -247,21 +246,6 @@ public class LogTail {
         logger.info(MessageFormat.format("Count {4}, Bytes {5}", details2));
 
         return temp_name;
-    }
-
-    /**
-     * Push the given file to the database server. This essentially runs the
-     * CouchPush application.
-     *
-     * @param filename
-     * @throws MalformedURLException
-     * @throws IOException
-     */
-    public void push_feed(String filename) throws MalformedURLException, IOException {
-        File attachment= new File(filename);
-        CouchPush cp = new CouchPush(global);
-        cp.open();
-        cp.push_feed(attachment);
     }
 
     /**

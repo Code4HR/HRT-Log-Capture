@@ -11,16 +11,13 @@ package org.hrva.capture;
 
 import java.io.*;
 import java.net.MalformedURLException;
+import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.text.MessageFormat;
 import java.util.*;
+import org.apache.commons.cli.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.kohsuke.args4j.Argument;
-import org.kohsuke.args4j.CmdLineException;
-import org.kohsuke.args4j.CmdLineParser;
-import org.kohsuke.args4j.Option;
 
 /**
  * Reformats the tail of a GPS Log file to extract essential fields.
@@ -80,17 +77,6 @@ public class Reformat {
     /** Properties for this application. */
      Properties global;
 
-    /** Output file name. */
-    @Option(name = "-o", usage = "Output file name.")
-    String extract_filename = "hrtrtf.csv";
-    /** Verbose debugging. */
-    @Option(name = "-v", usage = "Vebose logging")
-    boolean verbose= false;
-    /** Command-line Arguments. */
-    @Argument
-    List<String> arguments = new ArrayList<String>();
-    
-
     /** CSV Headings. */
     String[] headings = {
         "Date", "Time", "Vehicle", "Lat", "Lon", "Location Valid/Invalid",
@@ -143,7 +129,7 @@ public class Reformat {
         Reformat fmt = new Reformat(config);
         try {
             fmt.run_main(args);
-        } catch (CmdLineException ex1) {
+        } catch (org.apache.commons.cli.ParseException ex1) {
             log.fatal("Invalid Options", ex1);
         } catch (MalformedURLException ex2) {
             log.fatal("Invalid CouchDB URL", ex2);
@@ -172,23 +158,48 @@ public class Reformat {
      * </p>
      *
      * @param args the command line arguments
-     * @throws CmdLineException
+     * @throws org.apache.commons.cli.ParseException 
      * @throws FileNotFoundException
      * @throws IOException
      */
-    public void run_main(String[] args) throws CmdLineException, FileNotFoundException, IOException {
-        CmdLineParser parser = new CmdLineParser(this);
-        parser.parseArgument(args);
+    public void run_main(String[] args) throws org.apache.commons.cli.ParseException, FileNotFoundException, IOException {
+        Option verbose = new Option("v", "verbose", false, "Verbose logging");
+        Option output = OptionBuilder.withArgName("outputfile").hasArgs(1).withDescription("Output File Name").create("o");
+
+        Options options = new Options();
+        options.addOption(verbose);
+        options.addOption(output);
+
+        CommandLineParser parser = new GnuParser();
+        CommandLine line;
+        List positional_args;
+        String extract_filename="hrtrtf.csv";
+        
+        try {
+            // parse the command line arguments
+            line = parser.parse(options, args);
+            positional_args = line.getArgList();
+            if (positional_args.size() != 1) {
+                throw new org.apache.commons.cli.ParseException("One file must be named");
+            }
+            if (line.hasOption("o")) {
+                extract_filename= line.getOptionValue("o");
+            }
+        } catch (org.apache.commons.cli.ParseException exp) {
+            // oops, something went wrong
+            System.err.println("Parsing failed.  Reason: " + exp.getMessage());
+            throw exp;
+        }
 
         File target = new File(extract_filename);
         include_header= target.length() == 0;
         Writer wtr = new FileWriter(target, true);
         try {
-            for (String filename : arguments) {
-                Object[] details = { filename, extract_filename };
+            for (Object filename : positional_args) {
+                Object[] details = { (String)filename, extract_filename };
                 logger.info( MessageFormat.format("Reformatting {0} to {1}",details));
 
-                File source = new File(filename);
+                File source = new File((String)filename);
                 Reader rdr= new FileReader(source);
                 reformat(rdr, wtr);
                 rdr.close();
@@ -362,9 +373,9 @@ public class Reformat {
      * [Valid] Adher:2 [Valid] Odom:1924 [Valid] DGPS:On FOM:2
      * </code>
      *
-     * @param line
+     * @param line The source line from which to extract fields.
      * @return Map<String,String> from column title to value.
-     * @throws org.hrva.hrtail.Reformat.InvalidRow
+     * @throws org.hrva.capture.Reformat.InvalidRow 
      */
     public Map<String, String> extract_fields(String line) throws InvalidRow {
         Map<String, String> row = null;
