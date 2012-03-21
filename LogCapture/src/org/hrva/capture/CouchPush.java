@@ -4,7 +4,7 @@
  */
 package org.hrva.capture;
 
-import com.fourspaces.couchdb.Database; 
+import com.fourspaces.couchdb.Database;
 import com.fourspaces.couchdb.Document;
 import com.fourspaces.couchdb.Session;
 import java.io.*;
@@ -88,6 +88,22 @@ public class CouchPush {
     /** Logger. */
     final Log  logger = LogFactory.getLog(CouchPush.class);
 
+    /** 
+     * Cannot create the Document in CouchDB.  
+     * 
+     * <p>This wraps another exception.</p>
+     */
+    class DBException extends Exception {
+        public DBException() {
+            super();
+        }
+
+        public DBException(String message) {
+            super(message);
+        }
+
+    }
+    
     /**
      * Command-line program to push a file to the HRT couch DB.
      * <p>All this does is read properties and invoke run_main</p>
@@ -206,21 +222,21 @@ public class CouchPush {
             Object[] details = {
                 mapping, effective, filename, s.getHost(), db.getName()
             };
-            File attachment= new File((String)filename);
-            Document doc;
-            if (line.hasOption("f")) {
-                String msg = MessageFormat.format( 
-                        "Push Feed {2} to {3}/{4}", details );
-                logger.info( msg );
-                doc= push_feed(attachment);
-            } else {
-                String msg = MessageFormat.format(
-                        "Push {0} Mapping {2} to {3}/{4}", details );
-                logger.info(msg);
-                doc= push_mapping(mapping_type, effective_date, attachment);
-            }
-            if( doc != null ) {
-                logger.info("Created " + doc.getId());
+            File attachment = new File((String) filename);
+            try {
+                if (line.hasOption("f")) {
+                    String msg = MessageFormat.format(
+                            "Push Feed {2} to {3}/{4}", details);
+                    logger.info(msg);
+                    push_feed(attachment);
+                } else {
+                    String msg = MessageFormat.format(
+                            "Push {0} Mapping {2} to {3}/{4}", details);
+                    logger.info(msg);
+                    push_mapping(mapping_type, effective_date, attachment);
+                }
+            } catch (Exception ex) {
+                logger.error(ex.toString());
             }
         }
     }
@@ -267,16 +283,14 @@ public class CouchPush {
      * @return Document object that was created.
      * @throws FileNotFoundException  
      */
-    public Document push_feed(File attachment) throws FileNotFoundException {
+    public void push_feed(File attachment) throws FileNotFoundException, DBException, IOException {
         Date modified = new Date(attachment.lastModified());
         Document document = new Document();
         document.put("timestamp", fmt_date_time.format(modified));
         document.put("status", "new");
         document.put("doc_type", "Feed");
 
-        boolean ok= push(document, "feed", new FileReader(attachment) );
-        if( ok ) return document;
-        return null;
+        push(document, "feed", new FileReader(attachment) );
     }
 
     /**
@@ -297,7 +311,7 @@ public class CouchPush {
      * @return Document object that was created.
      * @throws FileNotFoundException  
      */
-    public Document push_mapping(String mapping, String effective, File attachment) throws FileNotFoundException {
+    public void push_mapping(String mapping, String effective, File attachment) throws FileNotFoundException, DBException, IOException {
         Date modified = new Date(attachment.lastModified());
         Document document = new Document();
         document.put("timestamp", fmt_date_time.format(modified));
@@ -305,9 +319,7 @@ public class CouchPush {
         document.put("effective_date", effective);
         document.put("doc_type", "Mapping");
 
-        boolean ok=push(document, "content", new FileReader(attachment) );
-        if( ok ) return document;
-        return null;
+        push(document, "content", new FileReader(attachment) );
     }
 
     /**
@@ -319,7 +331,7 @@ public class CouchPush {
      * @param attachment a Reader for a File to attach
      * @return  True if the push was successful.
      */
-    public boolean push(Document document, String name, Reader attachment) {
+    public void push(Document document, String name, Reader attachment) throws DBException, FileNotFoundException, IOException {
         try {
             BufferedReader rdr = new BufferedReader(attachment);
 
@@ -336,14 +348,19 @@ public class CouchPush {
             }
             Document resp= db.putAttachment(id, rev1, name, "text/csv", content.toString());
             logger.debug( resp );
-            return resp.getBoolean("ok");
+            if( resp.getBoolean("ok") ) {
+                logger.info("Created " + resp.getId());
+                return;
+            }
+            throw new DBException( resp.toString() );
             
         } catch (java.io.FileNotFoundException ex1) {
             logger.error(ex1);
+            throw ex1;
         } catch (java.io.IOException ex2) {
             logger.error(ex2);
+            throw ex2;
         }
-        return false;
 
     }
 }
